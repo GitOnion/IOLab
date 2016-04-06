@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% set title = "customers' listing" %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <h1>Welcome to ACME Aircraft Parts</h1>
+      <div class="section">
+        <h4>Our Awesome Customers:</h4>
+        <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="company">Company</th>
+              <th data-field="view">Details</th>
+              <th data-field="address">Addresses</th>
+            </tr>
+          </thead>
+          {% for customer in customers %}
+            <tr>
+              <td>{{ customer.company }}</td>
+              <td><a href="{{ url_for('each_customer', company=customer.company) }}">view</a></td>
+              <td><a href="{{ url_for('add_address', company=customer.company) }}">add</a></td>
+            </tr>
+          {% endfor %}
+        </table>
+        <div class="divider"></div>
+        <div class= "section">
+          <a href="{{ url_for('add') }}">Add a Customer</a>
+        </div>
+        <h4>Our Proud Orders:</h4>
+        <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="totalSpent">Order Total Amount</th>
+              <th data-field="detail">Order Details</th>
+              <th data-field="customer">Order Customers</th>
+            </tr>
+          </thead>
+          {% for order in orders %}
+            <tr>
+              <td>{{ order.id }}</td>
+              <td><a href="{{ url_for('order', id=order.id) }}">view</a></td>
+              <td>
+                {% for customer in order.Customer %}
+                  <a href="{{url_for('each_customer', company=customer.company)}}" style='padding-right:1em'>{{ customer.company }}</a>
+                {% endfor %}
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+        <div class="divider"></div>
+        <div class= "section">
+          <a href="{{ url_for('add_order') }}">Create a New Order</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

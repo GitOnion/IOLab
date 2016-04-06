@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% set title = "More Info" %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <h1>All about {{ customer.company }} </h1>
+      <div class= "section">
+        <a href="{{ url_for('display_customer') }}">Home</a>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <table class="responsive-table striped">
+            <tr><td>Company Name</td><td>{{ customer.company }}</td></tr>
+            <tr><td>Contact First Name</td><td>{{ customer.firstName }}</td></tr>
+            <tr><td>Contact Last Name</td><td>{{ customer.lastName }}</td></tr>
+            <tr><td>Contact Phone</td><td>{{ customer.phone }}</td></tr>
+            <tr><td>Contact Email</td><td>{{ customer.email }}</td></tr>
+        </table>
+        {% for address in customer.addresses %}
+        <h4>Address {{ loop.index }}</h4>
+        <div class="divider"></div>
+        <div class="section">
+        <table class="responsive-table striped">
+            <tr><td>Street Address</td><td>{{ address.streetAddress }}</td></tr>
+            <tr><td>City</td><td>{{ address.city }}</td></tr>
+            <tr><td>State</td><td>{{ address.state }}</td></tr>
+            <tr><td>Country</td><td>{{ address.country }}</td></tr>
+            <tr><td>Zip Code</td><td>{{ address.zipCode }}</td></tr>
+        </table>
+        {% endfor %}
+        <h4>Procured Order</h4>
+        <div class="divider"></div>
+        <div class="section">
+        <table class="responsive-table striped">
+          <thead>
+            <tr>
+              <th data-field="orderNo">Order Number</th>
+              <th data-field="amount">Order Amount</th>
+              <th data-field="numbers">Number of Parts Ordered</th>
+            </tr>
+          </thead>
+        {% for order in customer.orders %}
+          <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.totalSpent }}</td>
+            <td>{{ order.numPartsOrdered }}</td>
+          </tr>
+        {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

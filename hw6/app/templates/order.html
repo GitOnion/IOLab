@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% set title = "More Info" %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <h1>All About Order No.{{ order.id }} </h1>
+      <div class= "section">
+        <a href="{{ url_for('display_customer') }}">Home</a>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <table class="responsive-table striped">
+            <tr><td>Order No.</td><td>{{ order.id }}</td></tr>
+            <tr><td>Total Procured Amount</td><td>{{ order.totalSpent }}</td></tr>
+            <tr><td>Number of Parts Ordered</td><td>{{ order.numPartsOrdered }}</td></tr>
+        </table>
+      </div>
+      <h4>Procuring Customers</h4>
+      <div class="divider"></div>
+      <div class="section">
+        <table class="responsive-table striped">
+          {% for customer in order.Customer %}
+            <tr><td>{{ customer.company }}</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

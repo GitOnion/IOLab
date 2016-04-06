@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class= "section">
+      <a href="{{ url_for('display_customer') }}">Home</a>
+    </div>
+    <h2>Add Address for client {{ company }}</h2>
+    <form action="" method="post" name="add_address">
+      {{ form.hidden_tag() }}
+      <div class="divider"></div>
+      <div class="section">
+        <p>
+          Street Address:<br>
+          {{ form.streetAddress(size=120) }}<br>
+          City:
+          {{ form.city(size=120) }}<br>
+          State:
+          {{ form.state(size=120) }}<br>
+          Country:<br>
+          {{ form.country(size=120) }}<br>
+          Zip Code:<br>
+          {{ form.zipCode(size=5) }}<br>
+        </p>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <!-- Additional form fields for the Address should go here -->
+      </div>
+      <p><input type="submit" value="Add Address"></p>
+    </form>
+  </div>
+</div>
+{% endblock %}
